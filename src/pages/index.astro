@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import g from '../content/glowna.json';
+import ustawienia from '../content/ustawienia.json';
+import opinie from '../content/opinie.json';
+import { asset, href, md } from '../lib/util';
+---
+<Base page="start">
+  <section class="hero">
+    <div class="hero__blob hero__blob--a" aria-hidden="true"></div>
+    <div class="hero__blob hero__blob--b" aria-hidden="true"></div>
+    <div class="hero__inner wrap">
+      <div class="hero__text" data-reveal>
+        <p class="eyebrow">{ustawienia.tytul} {ustawienia.imie_nazwisko}</p>
+        <h1>{g.hero_naglowek}</h1>
+        <p class="lead">{g.hero_tekst}</p>
+        <div class="actions">
+          <a class="btn btn--solid" href={href('kontakt/#formularz')}>Umów konsultację</a>
+          <a class="btn" href={href('oferta/')}>Zobacz ofertę</a>
+        </div>
+        <ul class="chips">
+          {g.hero_etykiety.map((e) => <li>{e}</li>)}
+        </ul>
+      </div>
+      <div class="hero__art" data-reveal>
+        <div class="ring" aria-hidden="true"></div>
+        <Art name="pair" class="hero__pair" />
+      </div>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50c200-40 440-50 720-10s520 40 720 0v50H0z" /></svg>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="kiedy">
+    <div class="wrap">
+      <header class="section__head" data-reveal>
+        <h2 id="kiedy">{g.kiedy_naglowek}</h2>
+        <p>{g.kiedy_wstep}</p>
+      </header>
+      <ul class="tiles">
+        {g.kiedy.map((k, i) => (
+          <li class="tile" data-reveal style={`--d:${(i % 4) * 70}ms`}>
+            <Art name="paw" class="tile__icon" />
+            <h3>{k.tytul}</h3>
+            <p>{k.opis}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="kroki">
+    <div class="wave wave--top" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 40c240 40 480 40 720 0s480-40 720 0V0H0z" /></svg>
+    </div>
+    <div class="wrap">
+      <header class="section__head" data-reveal>
+        <h2 id="kroki">{g.kroki_naglowek}</h2>
+      </header>
+      <ol class="steps">
+        {g.kroki.map((k, i) => (
+          <li class="step" data-reveal style={`--d:${i * 90}ms`}>
+            <span class="step__num" aria-hidden="true">{i + 1}</span>
+            <h3>{k.tytul}</h3>
+            <p>{k.opis}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="center" data-reveal><a class="btn" href={href('oferta/#badania')}>Co przygotować na konsultację?</a></p>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50c240-40 480-40 720 0s480 40 720 0v40H0z" /></svg>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="o-mnie">
+    <div class="wrap about">
+      <div class="about__photo" data-reveal>
+        {g.o_mnie_zdjecie ? (
+          <img src={asset(g.o_mnie_zdjecie)} alt={`${ustawienia.imie_nazwisko} z pacjentem`} loading="lazy" />
+        ) : (
+          <div class="photo-ph"><Art name="cat" /><span>Tu pojawi się zdjęcie</span></div>
+        )}
+      </div>
+      <div class="about__text" data-reveal>
+        <p class="eyebrow">O mnie</p>
+        <h2 id="o-mnie">{g.o_mnie_naglowek}</h2>
+        <div class="prose" set:html={md(g.o_mnie_tekst)} />
+        <p class="signature">{ustawienia.tytul} {ustawienia.imie_nazwisko}</p>
+      </div>
+    </div>
+  </section>
+
+  {opinie.opinie.length > 0 && (
+    <section class="section section--soft" aria-labelledby="opinie">
+      <div class="wrap">
+        <header class="section__head" data-reveal><h2 id="opinie">Co mówią opiekunowie</h2></header>
+        <div class="quotes">
+          {opinie.opinie.slice(0, 3).map((o: any) => (
+            <figure class="quote" data-reveal>
+              <blockquote>{o.tresc}</blockquote>
+              <figcaption>{o.autor}{o.zwierze && `, opiekun(ka) ${o.zwierze}`}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p class="center"><a class="btn" href={href('opinie/')}>Wszystkie opinie</a></p>
+      </div>
+    </section>
+  )}
+
+  <section class="cta" aria-labelledby="cta">
+    <div class="wrap cta__inner" data-reveal>
+      <Art name="dog" class="cta__art" />
+      <div>
+        <h2 id="cta">{g.cta_naglowek}</h2>
+        <p>{g.cta_tekst}</p>
+        <div class="actions">
+          <a class="btn btn--solid" href={href('kontakt/#formularz')}>Napisz do mnie</a>
+          <a class="btn btn--ghost" href={ustawienia.instagram_url} target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

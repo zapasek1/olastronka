@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import p from '../content/polityka.json';
+import { md } from '../lib/util';
+---
+<Base page="inne" title="Polityka prywatności" description="Polityka prywatności strony Meat the vet.">
+  <section class="page-head page-head--small">
+    <div class="wrap"><h1>Polityka prywatności</h1></div>
+  </section>
+  <section class="section">
+    <div class="wrap narrow prose" set:html={md(p.tresc)} />
+  </section>
+</Base>

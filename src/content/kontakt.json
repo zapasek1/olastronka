@@ -1,0 +1,11 @@
+{
+  "wstep": "Napisz, z czym przychodzisz. Odpowiadam zwykle w ciągu kilku dni roboczych i wspólnie ustalamy termin oraz formę konsultacji.",
+  "lokalizacje": [
+    { "nazwa": "Konsultacje online", "adres": "", "opis": "Rozmowa wideo, z każdego miejsca w Polsce." },
+    { "nazwa": "Gabinet", "adres": "", "opis": "" }
+  ],
+  "form_naglowek": "Formularz zgłoszeniowy",
+  "zgoda": "Wyrażam zgodę na przetwarzanie moich danych w celu odpowiedzi na zgłoszenie i umówienia konsultacji.",
+  "podziekowanie": "Dziękuję! Wiadomość dotarła. Odezwę się najszybciej, jak to możliwe.",
+  "temat_maila": "Nowe zgłoszenie ze strony Meat the vet"
+}

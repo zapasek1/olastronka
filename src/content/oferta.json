@@ -1,0 +1,69 @@
+{
+  "wstep": "Każdy pies i kot jest inny, dlatego nie korzystam z gotowych schematów. Plan żywienia powstaje na podstawie badań, rozmowy z Tobą i tego, co realnie da się wprowadzić w Twoim domu.",
+  "uslugi": [
+    {
+      "nazwa": "Pierwsza konsultacja",
+      "podtytul": "Dla zwierzaków, które poznaję po raz pierwszy",
+      "czas": "do 60 minut",
+      "cena": "",
+      "forma": "Online lub w gabinecie",
+      "zawiera": [
+        "omówienie ankiety i wyników badań",
+        "rozmowę o zdrowiu, apetycie i codziennych nawykach",
+        "wybór sposobu karmienia: karma gotowa, dieta gotowana lub surowa",
+        "indywidualny plan żywienia przesłany mailem",
+        "odpowiedź na pytania, które pojawią się po konsultacji"
+      ]
+    },
+    {
+      "nazwa": "Konsultacja kontrolna",
+      "podtytul": "Dla zwierzaków, z którymi już się znamy",
+      "czas": "do 30 minut",
+      "cena": "",
+      "forma": "Online lub w gabinecie",
+      "zawiera": [
+        "sprawdzenie, jak dieta się sprawdza w praktyce",
+        "omówienie wagi, samopoczucia i nowych wyników",
+        "poprawki w jadłospisie",
+        "plan na kolejne tygodnie"
+      ]
+    }
+  ],
+  "uwagi": "Zalecenia wysyłam mailem w ciągu 7 dni roboczych od konsultacji. Przez 2 tygodnie od ich otrzymania możesz dopytać o wszystko, co będzie niejasne.",
+  "modele_naglowek": "Jak można karmić?",
+  "modele_wstep": "Nie ma jednej najlepszej diety dla wszystkich. Pomogę wybrać taką, która pasuje do zdrowia zwierzaka, Twojego czasu i budżetu.",
+  "modele": [
+    { "nazwa": "Karma gotowa", "opis": "Dobiorę karmę suchą, mokrą lub weterynaryjną i podpowiem, ile jej podawać. Najwygodniejsza opcja na co dzień." },
+    { "nazwa": "Dieta gotowana (BACF)", "opis": "Domowe posiłki z gotowanych składników, uzupełnione o to, czego w nich brakuje. Dla tych, którzy lubią wiedzieć, co jest w misce." },
+    { "nazwa": "Dieta surowa (BARF)", "opis": "Surowe mięso, podroby i dodatki w dobrze wyliczonych proporcjach. Pokażę, jak przygotować ją bezpiecznie." }
+  ],
+  "badania_naglowek": "Jakie badania przygotować?",
+  "badania_wstep": "Wyniki pomagają mi dobrać dietę do tego, co dzieje się w organizmie. Powinny być aktualne, czyli nie starsze niż 3 miesiące w dniu konsultacji.",
+  "badania_wymagane": [
+    "morfologia krwi",
+    "biochemia krwi: wątroba, nerki i trzustka",
+    "poszerzony jonogram (wapń, fosfor, sód, potas, chlor, magnez)"
+  ],
+  "badania_dodatkowe": [
+    "witamina B12, kwas foliowy, żelazo i hormony tarczycy",
+    "badanie ogólne moczu (konieczne przy chorobach nerek i dróg moczowych)",
+    "badanie kału w kierunku pasożytów",
+    "USG jamy brzusznej",
+    "echo serca i pomiar ciśnienia u ras, które mają skłonność do chorób serca"
+  ],
+  "przygotuj_naglowek": "Co jeszcze warto przygotować?",
+  "przygotuj": [
+    "listę leków i suplementów, także tych podawanych w lecznicy",
+    "co zwierzak je teraz: nazwę karmy, smak i ilość w gramach na dzień, a przy diecie domowej przepis",
+    "przysmaki, gryzaki i oleje, które dostaje, z przybliżoną ilością",
+    "aktualną wagę",
+    "przy konsultacji online: zdjęcie zwierzaka z góry i z boku",
+    "orientacyjny miesięczny budżet na jedzenie"
+  ],
+  "faq": [
+    { "pytanie": "Czy konsultacja online wystarczy?", "odpowiedz": "W większości przypadków tak. Do ułożenia diety najważniejsze są badania, dokładny wywiad i zdjęcia zwierzaka, a to wszystko da się przekazać zdalnie." },
+    { "pytanie": "Czy muszę przejść na dietę domową?", "odpowiedz": "Nie. Wiele zwierzaków świetnie radzi sobie na dobrze dobranej karmie gotowej. Wybieramy to, co pasuje do zdrowia zwierzaka i Twoich możliwości." },
+    { "pytanie": "Mój pies lub kot nie ma jeszcze badań. Co robić?", "odpowiedz": "Napisz do mnie. Podpowiem, które badania będą potrzebne, i umówimy termin, kiedy wyniki będą gotowe." },
+    { "pytanie": "Czy zajmujesz się kotami?", "odpowiedz": "Tak, pracuję zarówno z psami, jak i z kotami, także z kotami wybrednymi i przewlekle chorymi." }
+  ]
+}

@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import k from '../content/kontakt.json';
+import oferta from '../content/oferta.json';
+import ustawienia from '../content/ustawienia.json';
+import { techConfig } from '../site.config';
+import { href } from '../lib/util';
+---
+<Base page="kontakt" title="Kontakt i zapisy" description="Umów konsultację dietetyczną dla psa lub kota. Formularz zgłoszeniowy, e-mail i miejsca konsultacji.">
+  <section class="page-head">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Kontakt</p>
+      <h1>Umów konsultację</h1>
+      <p class="lead">{k.wstep}</p>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50c200-40 440-50 720-10s520 40 720 0v50H0z" /></svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap contact">
+      <aside class="contact__info" data-reveal>
+        <h2>Gdzie się spotykamy</h2>
+        <ul class="places">
+          {k.lokalizacje.map((l) => (
+            <li class="place">
+              <h3>{l.nazwa}</h3>
+              {l.adres ? <p>{l.adres}</p> : l.nazwa !== 'Konsultacje online' && <p><span class="todo">adres do uzupełnienia</span></p>}
+              {l.opis && <p>{l.opis}</p>}
+            </li>
+          ))}
+        </ul>
+        <h2>Napisz bezpośrednio</h2>
+        <p>
+          <a href={`mailto:${ustawienia.email}`}>{ustawienia.email}</a>
+          {ustawienia.telefon && <><br /><a href={`tel:${ustawienia.telefon.replace(/[^\d+]/g, '')}`}>{ustawienia.telefon}</a></>}
+        </p>
+        <p><a class="insta" href={ustawienia.instagram_url} target="_blank" rel="noopener">Instagram @meat.thevet</a></p>
+        <Art name="cat" class="contact__art" />
+      </aside>
+
+      <form
+        id="formularz"
+        class="form"
+        novalidate
+        data-reveal
+        data-key={techConfig.web3formsKey}
+        data-email={ustawienia.email}
+        data-subject={k.temat_maila}
+        data-thanks={k.podziekowanie}
+      >
+        <h2>{k.form_naglowek}</h2>
+        <div class="form__row">
+          <label><span class="lbl">Imię i nazwisko <span aria-hidden="true">*</span></span>
+            <input name="name" autocomplete="name" required />
+          </label>
+          <label><span class="lbl">E-mail <span aria-hidden="true">*</span></span>
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+        </div>
+        <div class="form__row">
+          <label><span class="lbl">Telefon <small>(opcjonalnie)</small></span>
+            <input name="phone" type="tel" autocomplete="tel" />
+          </label>
+          <label><span class="lbl">Imię zwierzaka <small>(opcjonalnie)</small></span>
+            <input name="pet_name" />
+          </label>
+        </div>
+        <fieldset class="choice">
+          <legend>Zwierzę</legend>
+          <label><input type="radio" name="pet" value="Pies" checked /> Pies</label>
+          <label><input type="radio" name="pet" value="Kot" /> Kot</label>
+        </fieldset>
+        <div class="form__row">
+          <label><span class="lbl">Rodzaj konsultacji</span>
+            <select name="kind">
+              {oferta.uslugi.map((u) => <option>{u.nazwa}</option>)}
+              <option>Jeszcze nie wiem</option>
+            </select>
+          </label>
+          <label><span class="lbl">Forma</span>
+            <select name="mode">
+              <option>Online</option>
+              <option>W gabinecie</option>
+              <option>Bez różnicy</option>
+            </select>
+          </label>
+        </div>
+        <label><span class="lbl">Z czym przychodzisz? <span aria-hidden="true">*</span></span>
+          <textarea name="message" rows="6" required placeholder="Np. wiek i waga zwierzaka, choroby, co je teraz, czego oczekujesz od diety."></textarea>
+        </label>
+        <p class="form__hint">Wyniki badań i ankietę prześlesz mailem po ustaleniu terminu.</p>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <label class="consent-check">
+          <input type="checkbox" name="consent" required />
+          <span>{k.zgoda} Szczegóły w <a href={href('polityka-prywatnosci/')}>polityce prywatności</a>. <span aria-hidden="true">*</span></span>
+        </label>
+        <button class="btn btn--solid" type="submit">Wyślij zgłoszenie</button>
+        <p class="form__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    import { initForm } from '../scripts/form';
+    initForm();
+  </script>
+</Base>

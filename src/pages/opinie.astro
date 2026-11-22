@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import op from '../content/opinie.json';
+import ustawienia from '../content/ustawienia.json';
+import { href } from '../lib/util';
+const lista: { autor: string; zwierze?: string; tresc: string; zrodlo?: string }[] = op.opinie;
+---
+<Base page="opinie" title="Opinie" description="Opinie opiekunów psów i kotów po konsultacjach dietetycznych w Meat the vet.">
+  <section class="page-head">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Opinie</p>
+      <h1>Co mówią opiekunowie</h1>
+      <p class="lead">{op.wstep}</p>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50c200-40 440-50 720-10s520 40 720 0v50H0z" /></svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {lista.length > 0 ? (
+        <div class="quotes quotes--all">
+          {lista.map((o, i) => (
+            <figure class="quote" data-reveal style={`--d:${(i % 3) * 80}ms`}>
+              <blockquote>{o.tresc}</blockquote>
+              <figcaption>
+                {o.autor}{o.zwierze && <>, {o.zwierze}</>}
+                {o.zrodlo && <span class="quote__src">{o.zrodlo}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <div class="empty" data-reveal>
+          <Art name="pair" class="empty__art" />
+          <p>{op.pusty_tekst}</p>
+          <div class="actions">
+            <a class="btn btn--solid" href={ustawienia.instagram_url} target="_blank" rel="noopener">Zobacz Instagram</a>
+            <a class="btn" href={href('kontakt/#formularz')}>Umów konsultację</a>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

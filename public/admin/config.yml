@@ -1,0 +1,165 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# Panel edycji treści: https://<adres-strony>/admin/
+# Logowanie: przycisk „Sign In with Token” + token GitHub (szczegóły w README).
+
+backend:
+  name: github
+  repo: zapasek1/olastronka
+  branch: main
+  commit_messages:
+    update: 'Treść: aktualizacja „{{slug}}”'
+    uploadMedia: 'Plik: dodano {{path}}'
+    deleteMedia: 'Plik: usunięto {{path}}'
+
+publish_mode: simple
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: strona
+    label: Strona
+    description: Teksty, zdjęcia i dane kontaktowe. Po zapisaniu zmiany pojawią się na stronie po około 1-2 minutach.
+    files:
+      - name: ustawienia
+        label: Dane podstawowe
+        file: src/content/ustawienia.json
+        format: json
+        fields:
+          - { name: logo, label: Logo, widget: image, required: false, hint: 'Okrągłe logo (SVG lub PNG z przezroczystym tłem). Puste = znak tekstowy.' }
+          - { name: nazwa_strony, label: Nazwa strony, widget: string }
+          - { name: imie_nazwisko, label: Imię i nazwisko, widget: string }
+          - { name: tytul, label: Tytuł przed nazwiskiem, widget: string, hint: 'np. lek. wet.' }
+          - { name: rola, label: Kim jestem (jedna linia), widget: string }
+          - { name: email, label: E-mail, widget: string }
+          - { name: telefon, label: Telefon, widget: string, required: false, hint: 'Puste = telefon nie pojawi się na stronie.' }
+          - { name: instagram_url, label: Link do Instagrama, widget: string }
+          - { name: facebook_url, label: Link do Facebooka, widget: string, required: false }
+          - { name: firma, label: Nazwa firmy (stopka), widget: string, required: false }
+          - { name: nip, label: NIP, widget: string, required: false }
+          - { name: obszar, label: Gdzie przyjmuję (stopka), widget: string }
+          - { name: seo_opis, label: Opis dla Google, widget: text, hint: 'Do ~155 znaków. Pokazuje się w wynikach wyszukiwania.' }
+
+      - name: glowna
+        label: Strona główna
+        file: src/content/glowna.json
+        format: json
+        fields:
+          - { name: hero_naglowek, label: Główny nagłówek, widget: string }
+          - { name: hero_tekst, label: Tekst pod nagłówkiem, widget: text }
+          - { name: hero_etykiety, label: Etykiety pod przyciskami, widget: list, field: { name: e, label: Etykieta, widget: string } }
+          - { name: kiedy_naglowek, label: 'Sekcja „Kiedy warto”: nagłówek', widget: string }
+          - { name: kiedy_wstep, label: 'Sekcja „Kiedy warto”: wstęp', widget: text }
+          - name: kiedy
+            label: 'Kafelki „Kiedy warto”'
+            label_singular: kafelek
+            widget: list
+            summary: '{{fields.tytul}}'
+            fields:
+              - { name: tytul, label: Tytuł, widget: string }
+              - { name: opis, label: Opis, widget: text }
+          - { name: kroki_naglowek, label: 'Sekcja „Współpraca”: nagłówek', widget: string }
+          - name: kroki
+            label: Kroki współpracy
+            label_singular: krok
+            widget: list
+            summary: '{{fields.tytul}}'
+            fields:
+              - { name: tytul, label: Tytuł, widget: string }
+              - { name: opis, label: Opis, widget: text }
+          - { name: o_mnie_naglowek, label: 'O mnie: nagłówek', widget: string }
+          - { name: o_mnie_zdjecie, label: 'O mnie: zdjęcie', widget: image, required: false, hint: 'Pionowe, min. 800 px szerokości.' }
+          - { name: o_mnie_tekst, label: 'O mnie: tekst', widget: markdown }
+          - { name: cta_naglowek, label: 'Zaproszenie na dole: nagłówek', widget: string }
+          - { name: cta_tekst, label: 'Zaproszenie na dole: tekst', widget: text }
+
+      - name: oferta
+        label: Oferta i cennik
+        file: src/content/oferta.json
+        format: json
+        fields:
+          - { name: wstep, label: Wstęp, widget: text }
+          - name: uslugi
+            label: Konsultacje
+            label_singular: konsultację
+            widget: list
+            summary: '{{fields.nazwa}} {{fields.cena}}'
+            fields:
+              - { name: nazwa, label: Nazwa, widget: string }
+              - { name: podtytul, label: Dla kogo, widget: string }
+              - { name: czas, label: Czas, widget: string }
+              - { name: cena, label: Cena, widget: string, required: false, hint: 'np. 250 zł' }
+              - { name: forma, label: Forma, widget: string }
+              - { name: zawiera, label: Co obejmuje, widget: list, field: { name: p, label: Punkt, widget: string } }
+          - { name: uwagi, label: Ważna informacja pod cennikiem, widget: text, required: false }
+          - { name: modele_naglowek, label: 'Sposoby karmienia: nagłówek', widget: string }
+          - { name: modele_wstep, label: 'Sposoby karmienia: wstęp', widget: text }
+          - name: modele
+            label: Sposoby karmienia
+            label_singular: sposób
+            widget: list
+            summary: '{{fields.nazwa}}'
+            fields:
+              - { name: nazwa, label: Nazwa, widget: string }
+              - { name: opis, label: Opis, widget: text }
+          - { name: badania_naglowek, label: 'Badania: nagłówek', widget: string }
+          - { name: badania_wstep, label: 'Badania: wstęp', widget: text }
+          - { name: badania_wymagane, label: Badania potrzebne, widget: list, field: { name: b, label: Badanie, widget: string } }
+          - { name: badania_dodatkowe, label: Badania mile widziane, widget: list, field: { name: b, label: Badanie, widget: string } }
+          - { name: przygotuj_naglowek, label: 'Co przygotować: nagłówek', widget: string }
+          - { name: przygotuj, label: Co przygotować, widget: list, field: { name: p, label: Punkt, widget: string } }
+          - name: faq
+            label: Częste pytania
+            label_singular: pytanie
+            widget: list
+            summary: '{{fields.pytanie}}'
+            fields:
+              - { name: pytanie, label: Pytanie, widget: string }
+              - { name: odpowiedz, label: Odpowiedź, widget: text }
+
+      - name: opinie
+        label: Opinie
+        file: src/content/opinie.json
+        format: json
+        fields:
+          - { name: wstep, label: Wstęp, widget: text }
+          - { name: pusty_tekst, label: Tekst, gdy nie ma jeszcze opinii, widget: text }
+          - name: opinie
+            label: Opinie
+            label_singular: opinię
+            widget: list
+            required: false
+            summary: '{{fields.autor}}'
+            hint: 'Publikuj tylko prawdziwe opinie, za zgodą autorów.'
+            fields:
+              - { name: autor, label: Autor (np. imię i pierwsza litera nazwiska), widget: string }
+              - { name: zwierze, label: Zwierzak (opcjonalnie), widget: string, required: false, hint: 'np. opiekunka kotki Luny' }
+              - { name: tresc, label: Treść, widget: text }
+              - { name: zrodlo, label: Źródło (opcjonalnie), widget: string, required: false, hint: 'np. Google, Instagram' }
+
+      - name: kontakt
+        label: Kontakt i formularz
+        file: src/content/kontakt.json
+        format: json
+        fields:
+          - { name: wstep, label: Wstęp, widget: text }
+          - name: lokalizacje
+            label: Miejsca konsultacji
+            label_singular: miejsce
+            widget: list
+            summary: '{{fields.nazwa}}'
+            fields:
+              - { name: nazwa, label: Nazwa (np. gabinet), widget: string }
+              - { name: adres, label: Adres, widget: string, required: false }
+              - { name: opis, label: Opis (np. dni przyjęć), widget: string, required: false }
+          - { name: form_naglowek, label: Nagłówek formularza, widget: string }
+          - { name: zgoda, label: Treść zgody RODO, widget: text }
+          - { name: podziekowanie, label: Podziękowanie po wysłaniu, widget: text }
+          - { name: temat_maila, label: Temat maila ze zgłoszeniem, widget: string }
+
+      - name: polityka
+        label: Polityka prywatności
+        file: src/content/polityka.json
+        format: json
+        fields:
+          - { name: tresc, label: Treść, widget: markdown }

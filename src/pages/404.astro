@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import { href } from '../lib/util';
+---
+<Base page="inne" title="Nie znaleziono strony">
+  <section class="section">
+    <div class="wrap empty">
+      <Art name="dog" class="empty__art" />
+      <h1>Ups, tej strony tu nie ma</h1>
+      <p>Może zawędrowała gdzieś za piłką. Wróć na stronę główną.</p>
+      <p><a class="btn btn--solid" href={href('')}>Strona główna</a></p>
+    </div>
+  </section>
+</Base>

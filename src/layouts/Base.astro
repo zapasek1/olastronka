@@ -1,0 +1,162 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/nunito';
+import '../styles/global.css';
+import ustawienia from '../content/ustawienia.json';
+import kontakt from '../content/kontakt.json';
+import Logo from '../components/Logo.astro';
+import Art from '../components/Art.astro';
+import { techConfig } from '../site.config';
+import { asset, href } from '../lib/util';
+
+interface Props {
+  title?: string;
+  description?: string;
+  page: 'start' | 'oferta' | 'opinie' | 'kontakt' | 'inne';
+}
+const { title, description, page } = Astro.props;
+const brand = ustawienia.nazwa_strony;
+const pageTitle = title ? `${title} | ${brand}` : `${brand} | Dietetyka psów i kotów, ${ustawienia.tytul} ${ustawienia.imie_nazwisko}`;
+const desc = description ?? ustawienia.seo_opis;
+const siteUrl = new URL(import.meta.env.BASE_URL, Astro.site).href;
+
+const nav = [
+  { id: 'start', label: 'Start', path: '' },
+  { id: 'oferta', label: 'Oferta', path: 'oferta/' },
+  { id: 'opinie', label: 'Opinie', path: 'opinie/' },
+  { id: 'kontakt', label: 'Kontakt', path: 'kontakt/' },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': ['VeterinaryCare', 'LocalBusiness'],
+  name: brand,
+  description: ustawienia.seo_opis,
+  url: siteUrl,
+  image: new URL(asset('og-image.png'), Astro.site).href,
+  email: ustawienia.email,
+  telephone: ustawienia.telefon || undefined,
+  areaServed: 'PL',
+  founder: { '@type': 'Person', name: ustawienia.imie_nazwisko, jobTitle: ustawienia.rola },
+  sameAs: [ustawienia.instagram_url, ustawienia.facebook_url].filter(Boolean),
+  location: kontakt.lokalizacje
+    .filter((l) => l.adres)
+    .map((l) => ({ '@type': 'Place', name: l.nazwa, address: l.adres })),
+  makesOffer: [
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Konsultacja dietetyczna dla psa lub kota' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Konsultacja kontrolna' } },
+  ],
+};
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="pl" data-wariant={techConfig.domyslnyWariant}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={new URL(asset('og-image.png'), Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f8f1ec" />
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline define:vars={{ pokaz: techConfig.pokazWarianty }}>
+      document.documentElement.classList.add('js');
+      if (pokaz) {
+        try {
+          var q = new URLSearchParams(location.search).get('wariant');
+          if (q) sessionStorage.setItem('wariant', q);
+          var w = q || sessionStorage.getItem('wariant');
+          if (w && /^[abc]$/.test(w)) document.documentElement.dataset.wariant = w;
+        } catch (e) {}
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#tresc">Przejdź do treści</a>
+
+    <header class="top">
+      <div class="top__inner wrap">
+        <a class="brand" href={href('')} aria-label="Meat the vet, strona główna">
+          <Logo size={52} />
+          <span class="brand__text">
+            <span class="brand__name">{brand}</span>
+            <span class="brand__sub">dietetyka psów i kotów</span>
+          </span>
+        </a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+          <span class="menu-btn__bars" aria-hidden="true"></span>
+          <span class="sr">Menu</span>
+        </button>
+        <nav id="menu" class="nav" aria-label="Główne menu">
+          <ul>
+            {nav.map((n) => (
+              <li><a href={href(n.path)} aria-current={page === n.id ? 'page' : undefined}>{n.label}</a></li>
+            ))}
+          </ul>
+          <a class="btn btn--solid btn--small" href={href('kontakt/#formularz')}>Umów konsultację</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="tresc">
+      <slot />
+    </main>
+
+    <footer class="foot">
+      <div class="foot__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40c240 40 480 40 720 0s480-40 720 0v40H0z" /></svg>
+      </div>
+      <div class="foot__inner wrap">
+        <div class="foot__brand">
+          <Logo size={64} />
+          <p><strong>{brand}</strong><br />{ustawienia.tytul} {ustawienia.imie_nazwisko}<br />{ustawienia.rola}</p>
+        </div>
+        <div>
+          <h2 class="foot__h">Kontakt</h2>
+          <p>
+            <a href={`mailto:${ustawienia.email}`}>{ustawienia.email}</a>
+            {ustawienia.telefon && <><br /><a href={`tel:${ustawienia.telefon.replace(/[^\d+]/g, '')}`}>{ustawienia.telefon}</a></>}
+            <br />{ustawienia.obszar}
+          </p>
+        </div>
+        <div>
+          <h2 class="foot__h">Na skróty</h2>
+          <ul class="foot__links">
+            {nav.map((n) => <li><a href={href(n.path)}>{n.label}</a></li>)}
+            <li><a href={href('polityka-prywatnosci/')}>Polityka prywatności</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="foot__h">Instagram</h2>
+          <a class="insta" href={ustawienia.instagram_url} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
+            @meat.thevet
+          </a>
+          <Art name="paw" class="foot__paw" />
+        </div>
+      </div>
+      <p class="foot__copy wrap">© {year} {brand}{ustawienia.firma && `, ${ustawienia.firma}`}{ustawienia.nip && `, NIP ${ustawienia.nip}`}</p>
+    </footer>
+
+    {techConfig.pokazWarianty && (
+      <div class="variants" role="group" aria-label="Propozycje kolorystyki">
+        <span>Wariant</span>
+        <button type="button" data-w="a" title="Szałwia">A</button>
+        <button type="button" data-w="b" title="Pudrowy róż">B</button>
+        <button type="button" data-w="c" title="Jasny, minimalny">C</button>
+      </div>
+    )}
+
+    <script>
+      import { initUi } from '../scripts/ui';
+      initUi();
+    </script>
+  </body>
+</html>

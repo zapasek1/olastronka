@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import o from '../content/oferta.json';
+import { href } from '../lib/util';
+---
+<Base page="oferta" title="Oferta i cennik" description="Pierwsza konsultacja dietetyczna i konsultacja kontrolna dla psa lub kota. Online lub w gabinecie. Sprawdź, co obejmuje konsultacja i jakie badania przygotować.">
+  <section class="page-head">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Oferta</p>
+      <h1>Konsultacje dietetyczne</h1>
+      <p class="lead">{o.wstep}</p>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50c200-40 440-50 720-10s520 40 720 0v50H0z" /></svg>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Usługi i ceny">
+    <div class="wrap">
+      <div class="offers">
+        {o.uslugi.map((u, i) => (
+          <article class={`offer ${i === 0 ? 'offer--main' : ''}`} data-reveal style={`--d:${i * 100}ms`}>
+            <h2>{u.nazwa}</h2>
+            <p class="offer__sub">{u.podtytul}</p>
+            <p class="offer__price">{u.cena ? u.cena : <span class="todo">cena do uzupełnienia</span>}</p>
+            <ul class="offer__meta">
+              <li>{u.czas}</li>
+              <li>{u.forma}</li>
+            </ul>
+            <h3 class="offer__h">Co obejmuje</h3>
+            <ul class="checks">
+              {u.zawiera.map((z) => <li>{z}</li>)}
+            </ul>
+            <a class={`btn ${i === 0 ? 'btn--solid' : ''}`} href={href(`kontakt/?rodzaj=${encodeURIComponent(u.nazwa)}#formularz`)}>Zgłoś się</a>
+          </article>
+        ))}
+      </div>
+      <p class="note" data-reveal>{o.uwagi}</p>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="modele">
+    <div class="wave wave--top" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 40c240 40 480 40 720 0s480-40 720 0V0H0z" /></svg>
+    </div>
+    <div class="wrap">
+      <header class="section__head" data-reveal>
+        <h2 id="modele">{o.modele_naglowek}</h2>
+        <p>{o.modele_wstep}</p>
+      </header>
+      <ul class="models">
+        {o.modele.map((m, i) => (
+          <li class="model" data-reveal style={`--d:${i * 90}ms`}>
+            <Art name="bowl" class="model__icon" />
+            <h3>{m.nazwa}</h3>
+            <p>{m.opis}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50c240-40 480-40 720 0s480 40 720 0v40H0z" /></svg>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="badania-h" id="badania">
+    <div class="wrap two-col">
+      <div data-reveal>
+        <h2 id="badania-h">{o.badania_naglowek}</h2>
+        <p>{o.badania_wstep}</p>
+        <div class="card">
+          <h3>Potrzebne</h3>
+          <ul class="checks">{o.badania_wymagane.map((b) => <li>{b}</li>)}</ul>
+          <h3>Mile widziane, jeśli to możliwe</h3>
+          <ul class="dots">{o.badania_dodatkowe.map((b) => <li>{b}</li>)}</ul>
+        </div>
+      </div>
+      <div data-reveal style="--d:120ms">
+        <h2>{o.przygotuj_naglowek}</h2>
+        <div class="card card--pink">
+          <ul class="checks">{o.przygotuj.map((p) => <li>{p}</li>)}</ul>
+          <Art name="cat" class="card__art" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="faq">
+    <div class="wrap narrow">
+      <header class="section__head" data-reveal><h2 id="faq">Częste pytania</h2></header>
+      <div class="faq">
+        {o.faq.map((f) => (
+          <details class="faq__item" data-reveal>
+            <summary>{f.pytanie}</summary>
+            <p>{f.odpowiedz}</p>
+          </details>
+        ))}
+      </div>
+      <p class="center" data-reveal><a class="btn btn--solid" href={href('kontakt/#formularz')}>Umów konsultację</a></p>
+    </div>
+  </section>
+</Base>

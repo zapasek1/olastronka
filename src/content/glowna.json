@@ -1,0 +1,29 @@
+{
+  "hero_naglowek": "Dietetyka psów i kotów",
+  "hero_tekst": "Pomagam ułożyć żywienie, które naprawdę pasuje do Twojego zwierzaka: do jego zdrowia, wieku i apetytu, a także do Twojego codziennego rytmu. Spokojnie, krok po kroku i bez trudnych słów.",
+  "hero_etykiety": ["Psy i koty", "Karma gotowa, BARF i BACF", "Online i w gabinecie"],
+  "kiedy_naglowek": "Kiedy warto przyjść na konsultację?",
+  "kiedy_wstep": "Nie trzeba czekać na chorobę. Z dietetykiem warto porozmawiać zawsze, gdy masz wątpliwości, czy miska daje Twojemu zwierzakowi to, czego potrzebuje.",
+  "kiedy": [
+    { "tytul": "Zdrowy pies lub kot", "opis": "Chcesz mieć pewność, że dieta jest dobrze dobrana. To najprostsza profilaktyka na długie lata." },
+    { "tytul": "Nadwaga", "opis": "Plan odchudzania bez głodzenia, z bezpiecznym tempem i pomysłami na więcej ruchu." },
+    { "tytul": "Alergie i nietolerancje", "opis": "Dieta z jednym źródłem białka i prostym składem, która pomaga znaleźć to, co szkodzi." },
+    { "tytul": "Choroby nerek", "opis": "Mniej fosforu na początku choroby, a później ilość białka dopasowana do wyników badań." },
+    { "tytul": "Trzustka, wątroba i jelita", "opis": "Lżej strawne posiłki z mniejszą ilością tłuszczu, gdy przewód pokarmowy potrzebuje odpoczynku." },
+    { "tytul": "Cukrzyca", "opis": "Mniej węglowodanów i stały rytm posiłków, które ułatwiają utrzymanie dobrego poziomu cukru." },
+    { "tytul": "Choroba nowotworowa", "opis": "Żywienie jako wsparcie leczenia, które pomaga zachować siły i apetyt." },
+    { "tytul": "Dieta domowa", "opis": "Chcesz gotować albo karmić na surowo? Ułożę zbilansowany jadłospis, w którym niczego nie zabraknie." }
+  ],
+  "kroki_naglowek": "Jak wygląda współpraca?",
+  "kroki": [
+    { "tytul": "Napisz do mnie", "opis": "Wypełnij krótki formularz. Odezwę się, żeby ustalić termin i formę spotkania." },
+    { "tytul": "Przygotuj informacje", "opis": "Dostaniesz ankietę o zwierzaku. Odeślij ją razem z aktualnymi wynikami badań." },
+    { "tytul": "Porozmawiajmy", "opis": "Na konsultacji omawiamy zdrowie, nawyki i Twoje możliwości. Razem wybieramy sposób karmienia." },
+    { "tytul": "Plan żywienia", "opis": "Zalecenia i jadłospis dostajesz mailem. Jeśli pojawią się pytania, możesz do mnie napisać." }
+  ],
+  "o_mnie_naglowek": "Cześć, jestem Ola",
+  "o_mnie_zdjecie": "",
+  "o_mnie_tekst": "Jestem lekarzem weterynarii i zajmuję się żywieniem psów i kotów. Współpracuję z gabinetami weterynaryjnymi i stale się szkolę, między innymi z gastroenterologii oraz dietoterapii chorób jelit, trzustki i wątroby.\n\nWierzę, że dobra dieta nie musi być skomplikowana. Ma pasować do zwierzaka i do domu, w którym mieszka. Dlatego tłumaczę wszystko prostym językiem i układam plan, który da się naprawdę wprowadzić w życie.",
+  "cta_naglowek": "Zacznijmy od jednej wiadomości",
+  "cta_tekst": "Opisz w kilku zdaniach, z czym przychodzisz. Odpiszę i podpowiem, od czego zacząć."
+}

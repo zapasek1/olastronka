@@ -1,0 +1,20 @@
+---
+// Tymczasowy znak słowny. Po otrzymaniu logo (SVG/PNG) wystarczy wgrać je w CMS
+// w polu "Logo" i zostanie użyte zamiast tego znaku.
+import ustawienia from '../content/ustawienia.json';
+import { asset } from '../lib/util';
+interface Props { size?: number }
+const { size = 56 } = Astro.props;
+---
+{ustawienia.logo ? (
+  <img class="logo" src={asset(ustawienia.logo)} alt="Meat the vet" width={size} height={size} />
+) : (
+  <svg class="logo" width={size} height={size} viewBox="0 0 100 100" role="img" aria-label="Meat the vet">
+    <circle cx="50" cy="50" r="48" fill="var(--logo-bg)" />
+    <circle cx="50" cy="50" r="39" fill="none" stroke="var(--pink)" stroke-width="2.2" stroke-dasharray="190 55" stroke-linecap="round" transform="rotate(-30 50 50)" />
+    <text x="24" y="40" font-family="Fraunces Variable, serif" font-size="17" font-weight="600" fill="var(--pink-light)">meat</text>
+    <text x="24" y="57" font-family="Fraunces Variable, serif" font-size="17" font-weight="600" fill="var(--ink)">the</text>
+    <text x="24" y="74" font-family="Fraunces Variable, serif" font-size="17" font-weight="600" fill="var(--ink)">vet</text>
+    <path d="M62 78c-1-8 2-14 7-17l-1-6 4 3 4-3-1 6c4 3 5 9 3 17" fill="none" stroke="var(--cream)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)}
